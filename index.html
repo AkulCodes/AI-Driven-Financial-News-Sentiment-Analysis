@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial News Sentiment Analyzer</title>
+</head>
+<body>
+    <h1>Financial News Sentiment Analyzer</h1>
+    <form action="/analyze" method="post">
+        <label for="news_text">Enter Financial News Article Text:</label><br><br>
+        <textarea id="news_text" name="news_text" rows="10" cols="50"></textarea><br><br>
+
+        <label for="article_date">Enter Article Date:</label><br><br>
+        <input type="date" id="article_date" name="article_date"><br><br>
+
+        <label for="ticker_symbol">Enter Ticker Symbol:</label><br><br>
+        <input type="text" id="ticker_symbol" name="ticker_symbol" placeholder="e.g., AAPL"><br><br>
+
+        <input type="submit" value="Analyze Sentiment">
+    </form>
+
+    {% if sentiment %}
+    <h2>Sentiment Analysis Result:</h2>
+    <p>Sentiment: {{ sentiment }}</p>
+    <p>Article Date: {{ article_date }}</p>
+    <p>Ticker Symbol: {{ ticker_symbol }}</p>
+
+    {% if image_base64 %}
+    <h3>Sentiment vs. Stock Price:</h3>
+    <img src="data:image/png;base64,{{ image_base64 }}" alt="Sentiment vs. Stock Price">
+    {% endif %}
+    
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    {% endif %}
+</body>
+</html>
